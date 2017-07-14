@@ -3,10 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title>Dojo Survey</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $("#submit").click(function(){
+                    if($('#name').val() == ""){
+                          alert("Please fill in name")
+                    }
+              })
+        })
+    </script>
   </head>
   <body>
         <form action="/result" method="post">
-              Your Name: <input type="text" name="name" value="">
+              Your Name: <input id="name" type="text" name="name" value="">
               Dojo Location:
               <select name="location">
                     <option value="Seattle">Seattle</option>
@@ -23,7 +33,7 @@
                     <option value="Ruby">Ruby</option>
               </select>
               Comment (optional): <textarea name="comment" rows="4" cols="50"></textarea>
-              <input type="submit" value="Send">
+              <input id="submit" type="submit" value="Send">
         </form>
   </body>
 </html>

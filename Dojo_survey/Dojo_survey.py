@@ -17,10 +17,9 @@ def index():
 @app.route('/result', methods=['POST'])
 def result():
     print request.form
-    #name = request.form['name']
-    #location = request.form['location']
-    #language = request.form['language']
-    #comment = request.form['comment']
-    return render_template('result.html', user = request.form)
+    if len(request.form['name']) > 0:
+        return render_template('result.html', user = request.form)
+    else:
+        return redirect('/')
 
 app.run(debug=True)
