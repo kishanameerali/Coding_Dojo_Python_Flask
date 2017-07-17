@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ninja Gold</title>
+    <style>
+          header > h4{
+                display: inline-block;
+          }
+          header > h5{
+                border: 2px solid black;
+                display: inline-block;
+                padding-left: 10px;
+                padding-right: 100px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+          }
+
+          section{
+                width: 800px;
+                height: 200px;
+          }
+
+          .win_gold{
+                height: 150px;
+                width: 150px;
+                text-align: center;
+                margin-right: 10px;
+                padding: 10px;
+                border: 2px solid black;
+                display: inline-block;
+          }
+
+          form{
+                display: inline-block;
+                margin-left: auto;
+                margin-right: auto;
+          }
+
+          #casino_gold > h4{
+                font-size: 0.93em;
+          }
+
+          #casino_gold{
+                height: 150px;
+                width: 150px;
+                text-align: center;
+                padding: 10px;
+                border: 2px solid black;
+                display: inline-block;
+          }
+
+          #activity{
+                border: 2px solid black;
+                overflow: scroll;
+                width: 800px;
+                height: 200px;
+          }
+    </style>
+  </head>
+  <body>
+        <header>
+              <h4>Your Gold: </h4>
+              {% if 'gold_total' in session %}
+              <h5 id='bankroll'>{{session['gold_total']}}</h5>
+              {% else %}
+              <h5 id='bankroll'> 0 </h5>
+              {% endif %}
+        </header>
+        <section>
+              <div class="win_gold">
+                    <h2>Farm</h2>
+                    <h4>(earns 10-20 golds)</h4>
+                    <form action="/process_money" method="post">
+                          <input type="hidden" name="building" value="farm">
+                          <input type="submit" value="Find Gold!">
+                    </form>
+              </div>
+              <div class="win_gold">
+                    <h2>Cave</h2>
+                    <h4>(earns 5-10 golds)</h4>
+                    <form action="/process_money" method="post">
+                          <input type="hidden" name="building" value="cave">
+                          <input type="submit" value="Find Gold!">
+                    </form>
+              </div>
+              <div class="win_gold">
+                    <h2>House</h2>
+                    <h4>(earns 2-5 golds)</h4>
+                    <form action="/process_money" method="post">
+                          <input type="hidden" name="building" value="house">
+                          <input type="submit" value="Find Gold!">
+                    </form>
+              </div>
+              <div id="casino_gold">
+                    <h2>Casino</h2>
+                    <h4>(earns/takes 0-50 golds)</h4>
+                    <form action="/process_money" method="post">
+                          <input type="hidden" name="building" value="casino">
+                          <input type="submit" value="Find Gold!">
+                    </form>
+              </div>
+        </section>
+
+
+        <p>Activities</p>
+        <div id="activity">
+              {% for idx in range(0,session['result']|length - 1) %}
+              <p>{{session['result'][idx]}}</p>
+              {% endfor %}
+        </div>
+
+  </body>
+</html>
