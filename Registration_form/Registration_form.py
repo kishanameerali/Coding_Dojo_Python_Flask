@@ -34,11 +34,11 @@ def index():
 
 @app.route('/user', methods=['POST'])
 def register():
-    if len(request.form['first_name']) or len(request.form['last_name']) or len(request.form['email']) or len(request.form['password']) < 1:
+    if len(request.form['first_name']) < 1 or len(request.form['last_name']) < 1 or len(request.form['email']) < 1 or len(request.form['password']) < 1:
         flash("Please fill in all fields")
     elif len(request.form['password']) < 9:
         flash("Password must be more than 8 characters")
-    elif (request.form['first_name']).isalpha() or (request.form['first_name']).isalpha() == False:
+    elif (request.form['first_name']).isalpha() == False or (request.form['first_name']).isalpha() == False:
         flash("First and Last names cannot contain any numbers")
     elif not EMAIL_REGEX.match(request.form['email']):
         flash("Invalid email address")
