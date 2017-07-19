@@ -105,7 +105,7 @@
 
         <p>Activities</p>
         <div id="activity">
-              {% for idx in range(0,session['result']|length - 1) %}
+              {% for idx in range(0,session['result']|length) %}
               <p>{{session['result'][idx]}}</p>
               {% endfor %}
         </div>

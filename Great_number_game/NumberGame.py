@@ -35,7 +35,7 @@ def guess():
     else:
         session['guessed_num'] = "won"
         print "You Guessed Right"
-    return redirect("/")
+    return render_template('index.html')
 
 @app.route('/reset')
 def reset():
