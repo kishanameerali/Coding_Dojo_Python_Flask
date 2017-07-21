@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>TMNT</title>
-    {% if({{color}}) %}
-        <img src="{{url_for('static', filename={{color}})}}">
+    {% if(color) %}
+        <img src="{{url_for('static', filename=color)}}">
     {% else %}
         <img src="{{url_for('static', filename='tmnt.png')}}">
     {% endif %}
