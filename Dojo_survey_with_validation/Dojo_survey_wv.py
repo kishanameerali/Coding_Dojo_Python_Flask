@@ -21,11 +21,34 @@ def index():
 
 @app.route('/result', methods=['POST'])
 def result():
+    #Initial Validation Method
+    '''
     print request.form
     if len(request.form['name']) and len(request.form['comment']) > 0 and len(request.form['comment']) < 121:
         return render_template('result.html', user = request.form)
     else:
         flash("Name or Comment field is blank or Comment field exceeds 120 characters")
         return redirect('/')
+    '''
+    #Second Validation Method using Lists to show all flash messages at once
+    error_messages = []
+    if (len(request.form['name']) < 2):
+        print "name validation failed"
+        error_messages.append("Name field cannot be blank")
+
+    if (len(request.form['comment']) < 2):
+        print "comment length validation failed"
+        error_messages.append("Comment field cannot be blank")
+
+    if (len(request.form['comment']) > 121):
+        print "comment validation failed"
+        error_messages.append("Comment field exceeds 120 characters")
+
+    if (error_messages):
+        for error in error_messages:
+            flash(error)
+        return redirect('/')
+
+    return render_template('result.html', user = request.form)
 
 app.run(debug=True)

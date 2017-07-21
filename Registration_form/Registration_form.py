@@ -34,6 +34,8 @@ def index():
 
 @app.route('/user', methods=['POST'])
 def register():
+    #Initial Validation Method
+    '''
     if len(request.form['first_name']) < 1 or len(request.form['last_name']) < 1 or len(request.form['email']) < 1 or len(request.form['password']) < 1:
         flash("Please fill in all fields")
     elif len(request.form['password']) < 9:
@@ -44,6 +46,32 @@ def register():
         flash("Invalid email address")
     elif request.form['password'] != request.form['confirm_password']:
         flash("Password and confirmation don't match")
+    else:
+        flash("User is registered")
+    return redirect('/')
+    '''
+    #Second Validation Method using Lists to show all flash messages at once
+    error_messages = []
+
+    if len(request.form['first_name']) < 1 or len(request.form['last_name']) < 1 or len(request.form['email']) < 1 or len(request.form['password']) < 1:
+        error_messages.append("Please fill in all fields")
+
+    if len(request.form['password']) < 9:
+        error_messages.append("Password must be more than 8 characters")
+
+    if (request.form['first_name']).isalpha() == False or (request.form['first_name']).isalpha() == False:
+        error_messages.append("First and Last names cannot contain any numbers")
+
+    if not EMAIL_REGEX.match(request.form['email']):
+        error_messages.append("Invalid email address")
+
+    if request.form['password'] != request.form['confirm_password']:
+        error_messages.append("Password and confirmation don't match")
+
+    if(error_messages):
+        for error in error_messages:
+            flash(error)
+        return redirect('/')
     else:
         flash("User is registered")
     return redirect('/')
